@@ -1282,12 +1282,14 @@
       let y = start;
       const sist = o.el._forskyvning ? start + o.el._forskyvning : null;
       const sistGyldig = sist !== null && sist >= o.m.h + 4 && sist <= hoyde - 4 && ledig(sist);
-      // Minste tid per plass: hjem igjen først når hjemmeplassen har vært ledig i 0,6 s.
-      // Ellers pendlet lappen til en katt i bevegelse mellom hjem og omvei.
+      // Minste tid per plass: hjem igjen først når hjemmeplassen har vært ledig i 1,5 s.
+      // Ellers pendlet lappen til en katt i bevegelse mellom hjem og omvei. Da lappene begynte
+      // å følge kattene som leker (09.10), ga 0,6 s 14–22 radbytter på 20 s med åtte katter
+      // som lekte; 1,5 s ga 10–11 (målt headless).
       const naaMs = performance.now();
       if (ledig(start)) { if (o.el._hjemLedigFra === undefined) o.el._hjemLedigFra = naaMs; }
       else o.el._hjemLedigFra = undefined;
-      const hjemLengeNok = o.el._hjemLedigFra !== undefined && naaMs - o.el._hjemLedigFra > 600;
+      const hjemLengeNok = o.el._hjemLedigFra !== undefined && naaMs - o.el._hjemLedigFra > 1500;
       if (sistGyldig && !(ledig(start) && hjemLengeNok)) y = sist;
       for (let i = 1; !ledig(y) && i <= 12; i++) {
         const opp = start - i * steg, ned = start + i * steg;
@@ -2138,9 +2140,12 @@
       if (vaer.regn > .35 && katt.p.status !== "tom") hoyde = Math.max(hoyde, 80 * (katt.erLeder ? 1.75 : 1)); // over paraplyen
       // vaktkatten går langs gjerdet: lappen henger under den, så den aldri skygger for lederne
       const prio = katt.p.status === "venter" ? 0 : katt.erLeder ? 1 : 2;
-      // En katt som leker, har lappen fast over lekeplassen. Fulgte den hver bevegelse,
-      // gikk overlappen med naboens lapp av og på hele tiden, og lappene hoppet (målt 06.10).
-      const anker = katt.leke && !katt.inn && !katt.skalLegge ? katt.slot : katt;
+      // Lappen følger alltid katten, også når den leker (09.10: snakkeboblene hang ikke
+      // helt med på kattene). Før sto lappen fast over lekeplassen mens katten løp
+      // opptil 98 px unna (målt headless). Hoppingen mellom rader som fikk oss til å feste
+      // den i runde 8, holdes nå nede av at lappen beholder plassen sin til hjemmeplassen
+      // har vært ledig i 1,5 s.
+      const anker = katt;
       const a = { el, id: katt.id, prio, anker: anker === katt ? "katt" : "slot", bx: anker.x, by: anker.y };
       if (katt.erVakt && katt.p.status !== "tom" && !REDUCED) onsket.push(Object.assign(a, { x: katt.x, y: katt.y + 34 }));
       else onsket.push(Object.assign(a, { x: anker.x, y: anker.y - hoyde - (anker === katt ? 0 : 8) }));

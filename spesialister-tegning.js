@@ -2,7 +2,7 @@
    node (test/tegning.test.mjs).
 
    Runde 9 (07.10): hagen var «veldig hakkete» på en ekstern skjerm. Målt på
-   DELL-skjermen: hagen brukte ~29 % CPU i Chrome, mens et tomt vindu brukte 0,1 %. WindowServer
+   en ekstern 1080p-skjerm: hagen brukte ~29 % CPU i Chrome, mens et tomt vindu brukte 0,1 %. WindowServer
    lå på 50–56 % også uten hagen. Den største kostnaden var altså å tegne hele hagen på nytt
    60 ganger i sekundet. Rolig modus tegner bare det som har endret seg (skitne rektangler),
    uten svaiing og helskjermseffekter, og med ~30 bilder i sekundet. */

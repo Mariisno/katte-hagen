@@ -44,7 +44,7 @@ cp hage.config.example.json hage.config.json   # then edit the names, see Config
 the garden with built-in demo data.
 
 ```sh
-open "spesialister.html?demo=1"
+open "file://$PWD/spesialister.html?demo=1"
 ```
 
 **Run it for real** — pick one:
@@ -139,8 +139,9 @@ looks like one. The rules have their own tests in `test/`.
 
 - **Local only.** The data source reads tmux on your machine and writes `spesialister.js`
   next to the page. Nothing is sent anywhere, and the page loads nothing from the internet.
-- **Only the last lines.** It captures the last ~32 lines of the *visible* screen of each
-  pane — never the scrollback, never Claude Code's transcripts.
+- **Only the last lines.** It captures at most the last 32 lines of the *visible* screen of
+  each pane and reads the ~15 lines just above the input box — never the scrollback, never
+  Claude Code's transcripts.
 - **Never types.** It never sends keys to a pane. Text you have typed but not sent in the
   input box is ignored and never shown.
 - **Click-to-jump** is a tiny helper on `127.0.0.1` with a random token per run. It only

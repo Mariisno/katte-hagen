@@ -1,5 +1,5 @@
 // Tester for hva som tegnes per bilde (spesialister-tegning.js). Kjør: node --test test/
-// Runde 9 (07.10): hagen brukte ~29 % CPU i Chrome på DELL-skjermen. Rolig modus tegner bare
+// Runde 9 (07.10): hagen brukte ~29 % CPU i Chrome på en ekstern 1080p-skjerm. Rolig modus tegner bare
 // det som er endret, med ~30 bilder i sekundet.
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -29,7 +29,7 @@ test("rolig modus: automatisk på uten Retina og når bildene henger, ellers av;
 });
 
 test("knappen bytter det du ser, og går tilbake til automatisk når det blir likt", () => {
-  assert.equal(T.nyttValg(null, 1, false), "av");   // DELL: auto på → klikk → av
+  assert.equal(T.nyttValg(null, 1, false), "av");   // ekstern skjerm: auto på → klikk → av
   assert.equal(T.nyttValg("av", 1, false), null);   // klikk igjen → på = auto
   assert.equal(T.nyttValg(null, 2, false), "på");   // Retina: auto av → klikk → på
   assert.equal(T.nyttValg("på", 2, false), null);

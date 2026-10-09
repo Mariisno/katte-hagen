@@ -1033,7 +1033,7 @@
   }
 
   // Påminnelse når noen har ventet på deg i over 5 min (og så hvert 15. min) — bare når
-  // hun ikke ser på panen. Banneret viser ventetiden uansett, også med lyden av.
+  // du ikke ser på panen. Banneret viser ventetiden uansett, også med lyden av.
   const PAMINN_FORST = L.PAMINN_FORST;
   // Når begynte katten å vente? Venter-hendelsen fra datakilden er lik i alle faner.
   function venterFra(k) {
@@ -1106,7 +1106,7 @@
 
   // ---------- oppsett etter vindusformen (CSS: body[data-oppsett]) ----------
   // Velger det som gir størst hage: «side» (hendelsene i en kolonne til høyre) når vinduet er
-  // bredt og lavt, ellers «under». Målt 06.10: på en ekstern skjerm (1344×730 i Chrome) fylte hagen
+  // bredt og lavt, ellers «under». Målt 06.10: på en ekstern 1080p-skjerm fylte hagen
   // 61 % av vinduet, med 183 px tomt gress på hver side.
   const toppEl = $("topp"), loggEl = $("logg");
   let oppsett = "", sisteHendelser = [];
@@ -1118,7 +1118,7 @@
     const side = Math.min(vw - panel - 22, (vh - th - 12) * 1.6); // hagens bredde med kolonne til høyre
     const under = Math.min(vw - 24, (vh - th - 112) * 1.6);       // hagens bredde med hendelsene under
     // Blir hagen omtrent like stor, vinner kolonnen: den fyller margene som ellers står tomme
-    // (1344×840: 133 px gress på hver side). Litt hysterese, så et vindu på grensen ikke vipper.
+    // (på en ekstern 1080p-skjerm: 133 px gress på hver side). Litt hysterese, så et vindu på grensen ikke vipper.
     const nytt = vw >= 1000 && side >= under * (oppsett === "side" ? .95 : .98) ? "side" : "under";
     if (nytt !== oppsett) { oppsett = nytt; document.body.dataset.oppsett = nytt; }
   }

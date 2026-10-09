@@ -40,7 +40,7 @@ fi
 # tmux ligger i Homebrew; launchd gir nesten tom PATH.
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${PATH}"
 # Uten UTF-8-locale bytter tmux ut æ, ø, å og «·» med «_» — da brekker navnene
-# («GØY» blir «G_Y»). launchd setter ingen LANG, så vi gjør det her.
+# («SØK» blir «S_K»). launchd setter ingen LANG, så vi gjør det her.
 export LANG="${LANG:-en_US.UTF-8}"
 export LC_ALL="${LC_ALL:-en_US.UTF-8}"
 export KATTEHAGE_LOGG="$LOGG"

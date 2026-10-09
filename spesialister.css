@@ -341,9 +341,9 @@ body.er-kompakt { background: var(--papir); align-items: stretch; justify-conten
 
 /* ---- Runde 8: oppsett etter vindusformen ----
    JS (velgOppsett) velger det oppsettet som gir størst hage og setter body[data-oppsett]:
-   «side»  = bredt og lavt (DELL 1344×840, MacBook og 27"-skjermen i fullskjerm): tellere og
+   «side»  = bredt og lavt (en bærbar eller ekstern skjerm i fullskjerm): tellere og
              hendelser i en kolonne til høyre, hagen får hele høyden. Før sto 180 px tomt
-             gress på hver side på DELL-skjermen (hagen fylte 61 % av vinduet).
+             gress på hver side på en ekstern 1080p-skjerm (hagen fylte 61 % av vinduet).
    «under» = smalt eller høyt (halvt vindu): hagen øverst i full bredde, og hendelsene under
              fyller resten. Før lå hagen midt i et felt med tomrom over og under.
    Under 640 px bredde eller 420 px høyde er det kompaktlista (uendret). */

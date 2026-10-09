@@ -90,15 +90,15 @@ test("5h-kvoten leses med tid til nullstilling", () => {
   assert.equal(vaerFor(13), "sol");
 });
 
-test("panes i grupperte økter (garden + garden-view) telles én gang", () => {
+test("panes i grupperte økter (session-a + session-b) telles én gang", () => {
   const rader = [
-    "garden|LEAD-D|%55|2.1.291|43|111|LEAD-D · side projects (Personal)",
-    "garden-view|LEAD-D|%55|2.1.291|43|111|LEAD-D · side projects (Personal)",
-    "engine|kattehage|%54|2.1.291|44|110|KEEPER · the garden (LEAD-D, Personal)",
+    "session-a|LEAD-D|%55|2.1.291|43|111|LEAD-D · side projects (Personal)",
+    "session-b|LEAD-D|%55|2.1.291|43|111|LEAD-D · side projects (Personal)",
+    "session-c|window-c|%54|2.1.291|44|110|KEEPER · the garden (LEAD-D, Personal)",
   ].join("\n");
   const ut = unikeRader(rader);
   assert.equal(ut.length, 2);
-  assert.equal(ut[0].okt, "garden"); // første forekomst vinner
+  assert.equal(ut[0].okt, "session-a"); // første forekomst vinner
   assert.equal(ut[0].synlig, true, "aktiv pane i aktivt vindu i en vist økt");
   assert.equal(ut[1].synlig, false, "økta har ingen klient");
   assert.equal(ut[1].navn, "KEEPER · the garden (LEAD-D, Personal)");
@@ -150,12 +150,12 @@ test("hopp: bare gyldige pane-id-er, bare lokale opphav, og alltid et nytt Ghost
   for (const ond of ["54", "%54; rm -rf /", "%", "$(id)", "%5a", "", null, 54]) assert.ok(!gyldigPaneId(ond), String(ond));
   assert.ok(tillattOpphav("null") && tillattOpphav(undefined) && tillattOpphav("http://127.0.0.1:8851"));
   assert.ok(!tillattOpphav("https://evil.example") && !tillattOpphav("http://127.0.0.1.evil.example"));
-  const plan = planForHopp("%54", "engine", "/opt/homebrew/bin/tmux");
+  const plan = planForHopp("%54", "session-c", "/opt/homebrew/bin/tmux");
   assert.deepEqual(plan.slice(0, 5), ["-na", "Ghostty", "--args", "-e", "/opt/homebrew/bin/tmux"], "alltid et nytt vindu");
   assert.ok(plan.includes("destroy-unattached"), "den grupperte økta rydder seg selv");
   assert.ok(!plan.includes("switch-client"), "flytter aldri et vindu du alt har");
-  assert.deepEqual(plan.slice(5, 9), ["new-session", "-t", "engine", ";"]);
-  assert.equal(planForHopp("%54", "engine", "tmux", "WezTerm")[1], "WezTerm", "terminalen kan velges");
+  assert.deepEqual(plan.slice(5, 9), ["new-session", "-t", "session-c", ";"]);
+  assert.equal(planForHopp("%54", "session-c", "tmux", "WezTerm")[1], "WezTerm", "terminalen kan velges");
 });
 
 test("aktivitet: siste verktøylinje gir lese/skrive/kjøre, prosa og innhold ignoreres", async () => {
@@ -169,7 +169,7 @@ test("aktivitet: siste verktøylinje gir lese/skrive/kjøre, prosa og innhold ig
   assert.equal(lesAktivitet(rad("  Wrote 1 file", "✢ … (5s)")).type, "skriv");
   assert.equal(lesAktivitet(rad("  Read 1 file, called plugin:playwright:playwright 2 times", "✢ … (5s)")).type, "kjor");
   assert.equal(lesAktivitet(rad("⏺ Update(spesialister.mjs)", "✢ … (5s)")).type, "skriv");
-  assert.equal(lesAktivitet(rad("  Reading the legacy approval calendar template", "✢ … (5s)")), null, "prosa er ikke en verktøylinje");
+  assert.equal(lesAktivitet(rad("  Reading the garden map before planting new seeds", "✢ … (5s)")), null, "prosa er ikke en verktøylinje");
   assert.equal(lesAktivitet(rad("  Read 1 file", "  Running 1 shell command…")).type, "kjor", "i gang vinner over ferdig");
   const a = lesAktivitet(rad("  Ran 4 shell commands"));
   assert.equal(a.tekst, "Ran 4 shell commands");

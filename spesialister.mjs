@@ -1,5 +1,6 @@
 // Katte-hagen: leser tmux LOKALT og skriver spesialister.js.
-// Leser bare de siste ~15 linjene per pane, og sender aldri taster.
+// Henter høyst de siste 32 linjene av det synlige skjermbildet per pane, vurderer de ~15
+// linjene over inntastingsfeltet, og sender aldri taster.
 // Kun Node-innebygde moduler — ingen npm-pakker. spesialister.js er gitignored.
 //
 //   node spesialister.mjs          skriv én gang
@@ -165,7 +166,7 @@ export function vaerFor(pst) { return pst > 80 ? "regn" : pst >= 50 ? "skyer" : 
 
 // De siste meningsfulle linjene, til infokortet. Rammer, footer og prompt-linja
 // (der brukeren kanskje skriver et utkast) tas bort.
-const KROM = /God dag|ctx ●|⏵⏵|auto mode|How is Claude|1: Bad|\/clear to save|To enable|Update installed|Restart to update|^\s*❯/;
+const KROM = /ctx ●|⏵⏵|auto mode|How is Claude|1: Bad|\/clear to save|To enable|Update installed|Restart to update|^\s*❯/;
 export function sisteMeningsfulle(rader) {
   const linjer = utenInntasting(rader);
   // Inntastingsfeltet står mellom de to siste rammelinjene. Alt fra den nest siste og
@@ -190,7 +191,7 @@ export function lesFot(linjer, kontoer = KONTOER) {
   return { modell, konto };
 }
 
-// Grupperte økter (garden + garden-view) og lenkede vinduer gjør at list-panes -a viser
+// Grupperte økter (session-a + session-b) og lenkede vinduer gjør at list-panes -a viser
 // samme pane flere ganger. pane_id er sannheten: første forekomst vinner.
 export function unikeRader(tekst) {
   const sett = new Set(), ut = [];

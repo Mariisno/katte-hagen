@@ -1,0 +1,19 @@
+{
+  "leaders": [
+    { "name": "LEAD-A", "short": "A", "spot": "house",    "session": "main" },
+    { "name": "LEAD-B", "short": "B", "spot": "birdbath", "session": "web" },
+    { "name": "LEAD-C", "short": "C", "spot": "sundial",  "session": "api" },
+    { "name": "LEAD-D", "short": "D", "spot": "party",    "session": "fun" }
+  ],
+  "watchCat": "WATCH",
+  "nameOption": "@name",
+  "accounts": [
+    { "label": "Work",     "match": "\\bWORK\\b",     "collar": "bell" },
+    { "label": "Personal", "match": "\\bPERSONAL\\b", "collar": "crown" }
+  ],
+  "quota": { "enabled": false },
+  "intervalSeconds": 10,
+  "hopPort": 8853,
+  "terminal": "Ghostty",
+  "browser": "Google Chrome"
+}

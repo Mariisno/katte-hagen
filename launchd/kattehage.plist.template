@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Katte-hagen: the data source starts at login and is kept running.
+  Reads tmux locally every few seconds and writes spesialister.js. Nothing leaves your Mac.
+  This is a template. scripts/install.sh fills in __LABEL__, __REPO__ and __LOG__.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>__LABEL__</string>
+  <key>ProgramArguments</key>
+  <array>
+    <!-- the wrapper finds node itself (Homebrew, /usr/local, newest nvm) and keeps the log short -->
+    <string>/bin/bash</string>
+    <string>__REPO__/launchd/start.sh</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>__REPO__</string>
+  <!-- launchd has an almost empty PATH; tmux usually lives in Homebrew -->
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <!-- without UTF-8, tmux turns «Ø» into «_» in pane names -->
+    <key>LANG</key>
+    <string>en_US.UTF-8</string>
+    <key>KATTEHAGE_LOGG</key>
+    <string>__LOG__</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <!-- restarted if it stops, but not more often than every 10 seconds -->
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>StandardOutPath</key>
+  <string>__LOG__</string>
+  <key>StandardErrorPath</key>
+  <string>__LOG__</string>
+</dict>
+</plist>

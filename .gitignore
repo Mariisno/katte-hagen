@@ -1,0 +1,11 @@
+# Your own setup and everything the data source writes. Never commit these.
+hage.config.json
+spesialister.js
+spesialister.js.tmp
+hendelser.json
+*.log
+
+# Built by scripts/make-apps.sh — they contain absolute paths.
+apps/
+
+.DS_Store

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spesialist-hagen</title>
+<link rel="icon" id="favicon" href="data:,">
+<!-- ?v= hindrer at en gammel kopi av stil eller kode blir brukt -->
+<script>document.write('<link rel="stylesheet" href="spesialister.css?v=' + Date.now() + '">');</script>
+</head>
+<body>
+
+<div id="ramme">
+  <header id="topp">
+    <span class="bryter" aria-hidden="true"><span class="merke">🐾 Spesialister</span></span>
+    <div id="venter" role="status" aria-live="polite"></div>
+    <div id="tittel">
+      <h1>Spesialist-hagen</h1>
+      <div class="knapper">
+        <button type="button" class="lydknapp" aria-pressed="false">🔇 Lyd av</button>
+        <button type="button" class="mjauknapp" title="Spiller en mjau nå, også med lyden av. Neste trykk gir neste variant.">🐱 Hør mjau</button>
+        <span class="lydlas" role="status" hidden>Klikk én gang i hagen for å slå på lyd</span>
+        <button type="button" id="roligknapp" aria-pressed="false">🍃 Rolig på</button>
+        <button type="button" id="miniknapp" title="Åpner hagen som en liten liste du kan ha i et hjørne">▢ Lite vindu</button>
+      </div>
+    </div>
+  </header>
+
+<main id="hage">
+<div id="wrap">
+  <canvas id="c" role="img" aria-label="Spesialist-hagen"></canvas>
+
+  <div id="lapper" aria-label="Kattene i hagen"></div>
+
+
+
+
+  <div id="kort" class="kort" hidden>
+    <div class="kort-topp">
+      <canvas id="kortPortrett" width="112" height="112" aria-hidden="true"></canvas>
+      <div>
+        <h2 id="kortNavn"></h2>
+        <p id="kortRolle"></p>
+      </div>
+    </div>
+    <dl>
+      <dt>Status</dt><dd id="kortStatus"></dd>
+      <dt>Modell</dt><dd id="kortModell"></dd>
+      <dt>Konto</dt><dd id="kortKonto"></dd>
+      <dt>Pane</dt><dd id="kortPane"></dd>
+    </dl>
+    <p id="kortOm"></p>
+    <div id="kortLinjer" hidden>
+      <h3>Siste linjer i panen</h3>
+      <pre id="kortLinjeTekst"></pre>
+    </div>
+  </div>
+
+  <div id="melding" role="status" aria-live="polite" hidden>
+    <h2 id="meldingTittel"></h2>
+    <p id="meldingTekst"></p>
+  </div>
+
+  <p id="gammel" role="status" hidden></p>
+</div>
+</main>
+
+  <footer id="bunn">
+    <ul class="teller" aria-label="Status i hagen">
+      <li title="Jobber — løper og leker"><span aria-hidden="true">🧶</span> <b id="nJobber">0</b> jobber</li>
+      <li title="Ferdig — sover"><span aria-hidden="true">💤</span> <b id="nFerdig">0</b> sover</li>
+      <li title="Venter — har et spørsmål til deg"><span aria-hidden="true">❓</span> <b id="nVenter">0</b> venter</li>
+      <li title="Tomt skall — ingen Claude i panen"><span aria-hidden="true">🧺</span> <b id="nTom">0</b> tomme</li>
+    </ul>
+    <section id="logg" aria-labelledby="loggTittel">
+      <h2 id="loggTittel">Hendelser</h2>
+      <ol id="loggListe"></ol>
+    </section>
+    <p id="undertittel">venter på første titt …</p>
+    <p class="versjon" id="versjon" title="Kode = front-end-filene fanen kjører · kilde = commit datakilden startet fra"></p>
+    <p class="hjelp">Klikk en katt for å hoppe til panen · hold musa over for detaljer · <kbd>E</kbd> fester kortet</p>
+  </footer>
+</div>
+
+<!-- Kompakt: en liten liste for et hjørne av skjermen, ingen tegning -->
+<main id="kompakt" hidden>
+  <h1 class="skjult-tekst">Spesialist-hagen</h1>
+  <header class="k-topp">
+    <p id="kVenter"></p>
+    <span id="kMeta"></span>
+  </header>
+  <p id="kKvote"></p>
+  <p id="kGammel" role="status" hidden></p>
+  <ul id="kListe" aria-label="Spesialister som venter eller jobber"></ul>
+  <p id="kSover"></p>
+  <section class="k-logg" aria-labelledby="kLoggTittel">
+    <h2 id="kLoggTittel">Siste</h2>
+    <ol id="kLoggListe"></ol>
+  </section>
+  <footer class="k-bunn">
+    <button type="button" class="lydknapp" aria-pressed="false">🔇 Lyd av</button>
+    <button type="button" class="mjauknapp" title="Spiller en mjau nå, også med lyden av. Neste trykk gir neste variant.">🐱 Hør mjau</button>
+    <span class="lydlas" role="status" hidden>Klikk én gang i hagen for å slå på lyd</span>
+    <span class="versjon" id="kVersjon"></span>
+    <a href="spesialister.html?kompakt=0">Hele hagen ⤢</a>
+  </footer>
+</main>
+
+<div id="beskjed" role="status" aria-live="polite" hidden></div>
+
+<script>document.write('<script src="spesialister-bevegelse.js?v=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="spesialister-tegning.js?v=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="spesialister-lyd.js?v=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="spesialister-app.js?v=' + Date.now() + '"><\/script>');</script>
+</body>
+</html>

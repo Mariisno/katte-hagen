@@ -19,6 +19,14 @@ answer sits in a golden ring at the top of the page. Click a cat to jump straigh
 
 *All screenshots use made-up demo data.* The interface is in Norwegian (Bokmål).
 
+## Why it exists
+
+I run several Claude Code sessions at once, each with its own job, and kept missing the one
+that was waiting for my answer. Cycling through tmux panes did not help. A garden where the
+waiting cat sits in a golden ring at the top of the page did, and it is nicer to have open all
+day than a list. It also became the place where I try out small things: sound that is off by
+default, a calm mode, a window small enough to live in a corner.
+
 ## Requirements
 
 - **macOS** with **tmux** (3.x) and **Node.js 20 or newer**. No npm packages — only Node's
@@ -166,6 +174,13 @@ looks like one. The rules have their own tests in `test/`.
 node --test test/
 ```
 
-## License
+## Status and license
 
-MIT — see [LICENSE](LICENSE). Made by [@Mariisno](https://github.com/Mariisno).
+- **Status:** in daily use on my own machine, and still changing. Expect small releases
+  rather than a roadmap. Issues and pull requests are welcome.
+- **License:** MIT — see [LICENSE](LICENSE).
+
+---
+
+By [Mari Svennevik Notland](https://notland-design.vercel.app), UX designer who also builds
+what she designs. [More on the portfolio](https://notland-design.vercel.app).
